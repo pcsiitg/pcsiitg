@@ -1,75 +1,100 @@
 // Styling for the navbar
 #mainNav {
-    background-color: $gray-darker;
-    .navbar-toggler {
+  position: absolute;
+  border-bottom: 1px solid $gray-200;
+  background-color: white;
+  @include sans-serif-font;
+  .navbar-brand {
+    font-weight: 800;
+    color: $gray-800;
+  }
+  .navbar-toggler {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 13px;
+    text-transform: uppercase;
+    color: $gray-800;
+  }
+  .navbar-nav {
+    > li.nav-item {
+      > a {
         font-size: 12px;
-        right: 0;
-        padding: 13px;
+        font-weight: 800;
+        letter-spacing: 1px;
         text-transform: uppercase;
-        color: white;
-        border: 0;
-        background-color: $theme-primary;
-        @include heading-font;
+      }
     }
-    .container {
-        padding: 0;
-        .navbar-brand {
-            color: $theme-primary;
-            @include script-font;
-            &:hover,
+  }
+  @media only screen and (min-width: 992px) {
+    border-bottom: 1px solid transparent;
+    background: transparent;
+    .navbar-brand {
+      padding: 10px 20px;
+      color: $white;
+      &:focus,
+      &:hover {
+        color: fade-out($white, .2);
+      }
+    }
+    .navbar-nav {
+      > li.nav-item {
+        > a {
+          padding: 10px 20px;
+          color: $white;
+          &:focus,
+          &:hover {
+            color: fade-out($white, .2);
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (min-width: 992px) {
+    -webkit-transition: background-color 0.2s;
+    -moz-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+    /* Force Hardware Acceleration in WebKit */
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    &.is-fixed {
+      /* when the user scrolls down, we hide the header right above the viewport */
+      position: fixed;
+      top: -67px;
+      -webkit-transition: -webkit-transform 0.2s;
+      -moz-transition: -moz-transform 0.2s;
+      transition: transform 0.2s;
+      border-bottom: 1px solid darken($white, .05);
+      background-color: fade-out($white, .1);
+      .navbar-brand {
+        color: $gray-900;
+        &:focus,
+        &:hover {
+          color: $primary;
+        }
+      }
+      .navbar-nav {
+        > li.nav-item {
+          > a {
+            color: $gray-900;
             &:focus,
-            &:active,
-            &.active {
-                color: darken($theme-primary, 10%);
+            &:hover {
+              color: $primary;
             }
+          }
         }
-        .navbar-nav {
-            .nav-item {
-                .nav-link {
-                    font-size: 90%;
-                    font-weight: 400;
-                    padding: .75em 0;
-                    letter-spacing: 1px;
-                    color: white;
-                    @include heading-font;
-                    &:hover,
-                    &.active {
-                        color: $theme-primary;
-                    }
-                }
-            }
-        }
+      }
     }
-}
-
-@media(min-width:992px) {
-    #mainNav {
-        padding: 25px 0;
-        -webkit-transition: padding .3s;
-        -moz-transition: padding .3s;
-        transition: padding .3s;
-        border: none;
-        background-color: transparent;
-        .navbar-brand {
-            font-size: 1.75em;
-            -webkit-transition: all .3s;
-            -moz-transition: all .3s;
-            transition: all .3s;
-        }
-        .navbar-nav {
-            .nav-item {
-                .nav-link {
-                    padding: 1.1em 1em !important;
-                }
-            }
-        }
-        &.navbar-shrink {
-            padding: 0;
-            background-color: $gray-darker;
-            .navbar-brand {
-                font-size: 1.25em;
-                padding: 12px 0;
-            }
-        }
+    &.is-visible {
+      /* if the user changes the scrolling direction, we show the header */
+      -webkit-transform: translate3d(0, 100%, 0);
+      -moz-transform: translate3d(0, 100%, 0);
+      -ms-transform: translate3d(0, 100%, 0);
+      -o-transform: translate3d(0, 100%, 0);
+      transform: translate3d(0, 100%, 0);
     }
+  }
 }
